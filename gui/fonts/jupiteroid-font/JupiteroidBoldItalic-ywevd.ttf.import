@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://okunbset85ll"
-path="res://.godot/imported/JupiteroidBoldItalic-ywevd.ttf-226f9159eecf0e90985bb22a7c35cf79.fontdata"
+path="res://.godot/imported/JupiteroidBoldItalic-ywevd.ttf-5f7ea3ee895de237af04d0b1b4ae049f.fontdata"
 
 [deps]
 
-source_file="res://fonts/jupiteroid-font/JupiteroidBoldItalic-ywevd.ttf"
-dest_files=["res://.godot/imported/JupiteroidBoldItalic-ywevd.ttf-226f9159eecf0e90985bb22a7c35cf79.fontdata"]
+source_file="res://gui/fonts/jupiteroid-font/JupiteroidBoldItalic-ywevd.ttf"
+dest_files=["res://.godot/imported/JupiteroidBoldItalic-ywevd.ttf-5f7ea3ee895de237af04d0b1b4ae049f.fontdata"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cmaj78llyyf1q"
-path="res://.godot/imported/JupiteroidItalic-lg26D.ttf-a722e98cb044275cc96660c5db8c60a1.fontdata"
+uid="uid://h8j2syu1flcu"
+path="res://.godot/imported/JupiteroidLightItalic-1GvK0.ttf-968fbf20686df9c0fe48da5a214a435c.fontdata"
 
 [deps]
 
-source_file="res://fonts/jupiteroid-font/JupiteroidItalic-lg26D.ttf"
-dest_files=["res://.godot/imported/JupiteroidItalic-lg26D.ttf-a722e98cb044275cc96660c5db8c60a1.fontdata"]
+source_file="res://gui/fonts/jupiteroid-font/JupiteroidLightItalic-1GvK0.ttf"
+dest_files=["res://.godot/imported/JupiteroidLightItalic-1GvK0.ttf-968fbf20686df9c0fe48da5a214a435c.fontdata"]
 
 [params]
 
