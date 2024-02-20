@@ -152,7 +152,8 @@ func _input(event:InputEvent)->void:
 	if(!listening):return
 	match device:
 		DEVICES.KEYBOARD:
-			if( event is InputEventKey):set_input_event( event )
+			if( event is InputEventKey	&&
+				event.is_pressed()		): set_input_event( event )
 		DEVICES.MOUSE_BUTTON:
 			if( event is InputEventMouseButton):set_input_event( event )
 		DEVICES.MOUSE_MOTION:

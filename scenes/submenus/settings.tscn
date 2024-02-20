@@ -28,26 +28,24 @@ tab_container = NodePath("TabContainer")
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 1
 
 [node name="audio" type="ScrollContainer" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/audio"]
+[node name="audio" type="GridContainer" parent="TabContainer/audio"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 20
 columns = 2
 
-[node name="Label" type="Label" parent="TabContainer/audio/GridContainer"]
+[node name="Label" type="Label" parent="TabContainer/audio/audio"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Master Volume"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SettingsSlider" type="HBoxContainer" parent="TabContainer/audio/GridContainer"]
+[node name="SettingsSlider" type="HBoxContainer" parent="TabContainer/audio/audio"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_522lh")
@@ -58,14 +56,14 @@ setting = "custom/audio/master/normalized_volume"
 type = 3
 default_value = 0.8
 
-[node name="Label2" type="Label" parent="TabContainer/audio/GridContainer"]
+[node name="Label2" type="Label" parent="TabContainer/audio/audio"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SFX Volume"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SettingsSlider2" type="HBoxContainer" parent="TabContainer/audio/GridContainer"]
+[node name="SettingsSlider2" type="HBoxContainer" parent="TabContainer/audio/audio"]
 layout_mode = 2
 script = ExtResource("3_522lh")
 max_value = 1.0
@@ -75,7 +73,7 @@ setting = "custom/audio/sfx/normalized_volume"
 type = 3
 default_value = 0.8
 
-[node name="Label3" type="Label" parent="TabContainer/audio/GridContainer"]
+[node name="Label3" type="Label" parent="TabContainer/audio/audio"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Music Volume
@@ -83,7 +81,7 @@ text = "Music Volume
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SettingsSlider3" type="HBoxContainer" parent="TabContainer/audio/GridContainer"]
+[node name="SettingsSlider3" type="HBoxContainer" parent="TabContainer/audio/audio"]
 layout_mode = 2
 script = ExtResource("3_522lh")
 max_value = 1.0
@@ -94,15 +92,16 @@ type = 3
 default_value = 0.8
 
 [node name="controls" type="ScrollContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/controls"]
+[node name="controls" type="GridContainer" parent="TabContainer/controls"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 5
 
-[node name="Label" type="Label" parent="TabContainer/controls/GridContainer"]
+[node name="Label" type="Label" parent="TabContainer/controls/controls"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -110,7 +109,7 @@ text = "Walk Left"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SettingsInput" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+[node name="SettingsInput" type="MenuButton" parent="TabContainer/controls/controls" node_paths=PackedStringArray("menu_root")]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -133,7 +132,7 @@ action = &"test"
 menu_root = NodePath("../../../..")
 popup_scene = ExtResource("5_scbcn")
 
-[node name="SettingsInput5" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+[node name="SettingsInput5" type="MenuButton" parent="TabContainer/controls/controls" node_paths=PackedStringArray("menu_root")]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -156,7 +155,7 @@ action = &"test"
 menu_root = NodePath("../../../..")
 popup_scene = ExtResource("5_scbcn")
 
-[node name="SettingsInput2" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+[node name="SettingsInput2" type="MenuButton" parent="TabContainer/controls/controls" node_paths=PackedStringArray("menu_root")]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -177,7 +176,7 @@ action = &"test"
 menu_root = NodePath("../../../..")
 popup_scene = ExtResource("5_scbcn")
 
-[node name="SettingsInput3" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+[node name="SettingsInput3" type="MenuButton" parent="TabContainer/controls/controls" node_paths=PackedStringArray("menu_root")]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -200,7 +199,7 @@ action = &"test"
 menu_root = NodePath("../../../..")
 popup_scene = ExtResource("5_scbcn")
 
-[node name="Label2" type="Label" parent="TabContainer/controls/GridContainer"]
+[node name="Label2" type="Label" parent="TabContainer/controls/controls"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -208,7 +207,7 @@ text = "Walk Left"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SettingsInput4" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+[node name="SettingsInput4" type="MenuButton" parent="TabContainer/controls/controls" node_paths=PackedStringArray("menu_root")]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -231,7 +230,7 @@ action = &"bug"
 menu_root = NodePath("../../../..")
 popup_scene = ExtResource("5_scbcn")
 
-[node name="SettingsInput6" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+[node name="SettingsInput6" type="MenuButton" parent="TabContainer/controls/controls" node_paths=PackedStringArray("menu_root")]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -254,7 +253,7 @@ action = &"bug"
 menu_root = NodePath("../../../..")
 popup_scene = ExtResource("5_scbcn")
 
-[node name="SettingsInput7" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+[node name="SettingsInput7" type="MenuButton" parent="TabContainer/controls/controls" node_paths=PackedStringArray("menu_root")]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -275,7 +274,7 @@ action = &"bug"
 menu_root = NodePath("../../../..")
 popup_scene = ExtResource("5_scbcn")
 
-[node name="SettingsInput8" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+[node name="SettingsInput8" type="MenuButton" parent="TabContainer/controls/controls" node_paths=PackedStringArray("menu_root")]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -328,7 +327,7 @@ mode = 5
 options = 2
 menu_root = NodePath("../..")
 method_class = 0
-method_method = &"settings_save"
+method_method = &"settings_save_all"
 popup_mode = 0
 popup_scene = ExtResource("7_xywbu")
 popup_text = "Are you sure you want to save all settings?"
@@ -343,7 +342,7 @@ mode = 5
 options = 2
 menu_root = NodePath("../..")
 method_class = 0
-method_method = &"settings_reset"
+method_method = &"settings_reset_all"
 popup_mode = 0
 popup_scene = ExtResource("7_xywbu")
 popup_text = "Are you sure you want to reset all your settings?"

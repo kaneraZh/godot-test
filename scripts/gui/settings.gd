@@ -45,6 +45,5 @@ func settings_check(id:int = tab_container.get_current_tab() )->bool:
 	return true
 
 func _ready()->void:
-	main_focus = tab_container.get_current_tab_control()
+	main_focus = tab_container.get_tab_bar()
 	super()
-	tab_container.get_current_tab_control().call_deferred(&"grab_focus")
