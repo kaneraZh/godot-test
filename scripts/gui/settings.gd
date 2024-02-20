@@ -15,11 +15,17 @@ func settings_read_all()->void:
 	for group:StringName in settings:
 		get_tree().call_group(group, &"read")
 func settings_save_all()->void:
-	for group:StringName in settings: get_tree().call_group(group, &"save")
+	for group:StringName in settings:
+		get_tree().call_group(group, &"save")
+	@warning_ignore("static_called_on_instance")
+	ManagerSettings.save_settings()
 func settings_reset_all()->void:
-	# ProjectSettings settings to initial value
-	# (read file with variables and default values?)
-	for group:StringName in settings: get_tree().call_group(group, &"read")
+	@warning_ignore("static_called_on_instance")
+	ManagerSettings.reset_settings()
+	@warning_ignore("static_called_on_instance")
+	ManagerSettings.save_settings()
+	for group:StringName in settings:
+		get_tree().call_group(group, &"read")
 
 func settings_read(id:int = tab_container.get_current_tab() ):
 	get_tree().call_group(settings[id], &"read")

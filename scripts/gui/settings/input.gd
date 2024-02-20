@@ -5,9 +5,7 @@ class_name SettingsInput
 @export var action:StringName : set=set_action, get=get_action
 func get_action()->StringName: return action
 func set_action(v:StringName)->void: action = v
-func is_action()->bool: return InputMap.has_action(action)
-#Array[StringName]	get_actions()
-#bool				has_action(action: StringName) const
+#func is_action()->bool: return InputMap.has_action(action)
 enum DEVICES{
 	ALL			=-1,
 	JOYSTICK_1	= 0,
@@ -191,7 +189,7 @@ func _on_selection(item_id:int)->void:
 			var popup:Control = popup_scene.instantiate()
 			popup.connect(&"tree_exiting", Callable(self, &"grab_focus"), CONNECT_DEFERRED)
 			popup.connect(&"accept", Callable(self, &"set_input_event"))
-			print_debug("Called listener with <%s>"%[device_id])
+			#print_debug("Called listener with <%s>"%[device_id])
 			popup.set_listening_device(device_id)
 			menu_root.add_popup(popup)
 
@@ -218,7 +216,7 @@ func _ready()->void:
 	popup.add_item("Clear")
 	popup.connect(&"index_pressed", Callable(self, &"_on_selection"))
 	
-	assert(is_action(), "requested action is not a registered action")
+	assert(InputMap.has_action(action), "requested action is not a registered action")
 	input_event_id = action_instances[action]+1 if action_instances.has(action) else 0
 	action_instances[action] = input_event_id
 	read()
@@ -238,9 +236,7 @@ func read()->void:
 			count+= 1
 	set_input_event(event)
 	input_event_old = event
-	#print_debug("loaded with <%s>\tevent is <%s>"%[input_event_id, events.size()])
-	#print_debug("loaded action <%s>\twith <%s>"%[action, input_event])
-	print("loaded action <%s>\twith <%s>"%[action, input_event])
+	#print("loaded action <%s>\twith <%s>"%[action, input_event])
 func save()->void:
 	if(input_event_old != input_event):
 		if(input_event_old != null):
@@ -248,4 +244,5 @@ func save()->void:
 		InputMap.action_add_event(action, input_event)
 	call_deferred(&"read")
 func check()->bool:
+	if(input_event == null): return input_event_old == null
 	return InputMap.action_has_event(action, input_event)

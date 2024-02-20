@@ -1,18 +1,33 @@
 extends Node
 
+#static func _get_input_map_events(
+	#actions:PackedStringArray
+#)->Dictionary:
+	#var action_events:Dictionary = {}
+	#for action:String in actions:
+		#action_events[action] = InputMap.action_get_events(action)
+	#return action_events
+#static func _set_input_map_events(
+	#action_events:Dictionary
+#)->void:
+	#for action in action_events.keys():
+		#InputMap.action_erase_events(action)
+		#for event:InputEvent in action_events[action]:
+			#InputMap.action_add_event(action, event)
+
 static func _get_project_settings(
 	include:PackedStringArray,
 	exclude:PackedStringArray,
 )->PackedStringArray:
 	var paths:PackedStringArray = []
 	for path in include:
-		var exlcude_valid:PackedStringArray = []
-		for p in exclude: if( p.begins_with(path) ): exlcude_valid.append(p)
-		var is_exclude=func(test): for p in exlcude_valid: if(test.begins_with(p)): return true
+		var exclude_valid:PackedStringArray = []
+		for p in exclude: if( p.begins_with(path) ): exclude_valid.append(p)
+		var is_exclude=func(test): for p in exclude_valid: if(test.begins_with(p)): return true
 		
 		for property:Dictionary in ProjectSettings.get_property_list():
 			var property_name:String = property["name"]
-			if(property_name.begins_with(path) && !is_exclude.call(property_name) ):
+			if( property_name.begins_with(path) && !is_exclude.call(property_name) ):
 				paths.append(property_name)
 	return paths
 static func _save_project_settings(
@@ -23,11 +38,9 @@ static func _save_project_settings(
 	var file:ConfigFile = ConfigFile.new()
 	for path:String in _get_project_settings(paths_include, paths_exclude):
 		var section:String = path.get_slice('/', 0)
-		file.set_value(
-			section,
-			path.trim_prefix("%s/"%section),
-			ProjectSettings.get(path)
-		)
+		var key:String = path.trim_prefix("%s/"%section)
+		var value = ProjectSettings.get(path) if !section.matchn("input") else InputMap.action_get_events(key)
+		file.set_value(section,key,value)
 		print("saved <%s> as %10s"%[path, ProjectSettings.get(path)])
 	return file.save(directory)
 static func _load_project_settings(
@@ -37,10 +50,20 @@ static func _load_project_settings(
 	var error:int = file.load(directory)
 	for section:String in file.get_sections():
 		for key in file.get_section_keys(section):
-			ProjectSettings.set_setting(
-				"%s/%s"%[section, key],
-				file.get_value(section, key)
-			)
+			match section:
+				"input":
+					InputMap.action_erase_events(key)
+					#var input:Dictionary =  file.get_value(section, key)
+					#InputMap.action_set_deadzone(key, input["deadzone"])
+					#for event:InputEvent in input["events"]:
+						#InputMap.action_add_event(key, event)
+					for event:InputEvent in file.get_value(section, key):
+						InputMap.action_add_event(key, event)
+				_:
+					ProjectSettings.set_setting(
+						"%s/%s"%[section, key],
+						file.get_value(section, key)
+					)
 	return error
 static func _reset_project_settings(
 	paths_include:PackedStringArray,

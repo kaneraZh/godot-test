@@ -136,6 +136,7 @@ enum DEVICES{
 }
 var device:DEVICES = DEVICES.KEYBOARD : set=set_listening_device
 func set_listening_device(device_id:DEVICES)->void:
+	@warning_ignore("int_as_enum_without_cast")
 	device = clampi(device_id, DEVICES.JOYSTICK_1, DEVICES.MIDI_DEVICE)
 var listening:bool=false : set=set_listening
 func set_listening(v:bool)->void:

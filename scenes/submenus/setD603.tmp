@@ -28,10 +28,8 @@ tab_container = NodePath("TabContainer")
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 1
 
 [node name="audio" type="ScrollContainer" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="audio" type="GridContainer" parent="TabContainer/audio"]
@@ -94,6 +92,7 @@ type = 3
 default_value = 0.8
 
 [node name="controls" type="ScrollContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="controls" type="GridContainer" parent="TabContainer/controls"]
@@ -106,7 +105,7 @@ columns = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "test"
+text = "Walk Left"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -204,7 +203,7 @@ popup_scene = ExtResource("5_scbcn")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "bug"
+text = "Walk Left"
 horizontal_alignment = 2
 vertical_alignment = 1
 

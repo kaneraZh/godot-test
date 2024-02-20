@@ -19,24 +19,12 @@ func is_setting(name:String)->bool:
 	return false
 
 func _run()->void:
-	#var file:ConfigFile = ConfigFile.new()
-	#file.
-	#print( ProjectSettings.get_setting("navigation/2d/default_cell_size") )
-	#print( ProjectSettings.get_setting("navigation/2d") )
+	#for property in ProjectSettings.get_property_list():
+		#if(property["name"].begins_with("input")):
+			#print(property["name"])
+	#ProjectSettings.clear('manager/settings/game_data/directory')
 	
-	#print( is_setting("global/trest") )
-	#print( ProjectSettings.has_setting("global/trest") )
-	#ProjectSettings.set_setting("global/trest", true)
-	#ProjectSettings.save()
-	#print( is_setting("global/trest") )
-	#print( ProjectSettings.has_setting("global/trest") )
-	
-	#ProjectSettings.save_custom("override.cfg")
-	
-	for property in ProjectSettings.get_property_list():
-		if(property["name"].begins_with("input")):
-			print(property["name"])
-	ProjectSettings.clear('manager/settings/game_data/directory')
+	print( JSON.stringify( InputMap.get_property_list(), '\t', false) )
 	
 	#print( InputEventAction.new().get_class() 			== "InputEventAction")
 	#print( InputEventJoypadButton.new().get_class() 	== "InputEventJoypadButton")
