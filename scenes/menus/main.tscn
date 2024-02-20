@@ -1,10 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqf0psddp2rsn"]
+[gd_scene load_steps=3 format=3 uid="uid://dqf0psddp2rsn"]
 
 [ext_resource type="Theme" uid="uid://df4sw8fwwoueb" path="res://gui/themes/menu.tres" id="1_w5n32"]
-[ext_resource type="Script" path="res://scripts/menus/menu.gd" id="2_m8i4u"]
-[ext_resource type="Theme" uid="uid://g7vo8gf6lyg" path="res://gui/themes/title.tres" id="3_j7q00"]
-[ext_resource type="Script" path="res://scripts/button.gd" id="4_6ekxj"]
-[ext_resource type="Script" path="res://scripts/menus/folder.gd" id="5_or4c5"]
+[ext_resource type="PackedScene" uid="uid://bdeerhsk4yj0n" path="res://scenes/submenus/main_menu.tscn" id="2_0eqa0"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,57 +12,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_w5n32")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("main_focus")]
+[node name="main_menu" parent="." instance=ExtResource("2_0eqa0")]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -216.0
-offset_right = 216.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_m8i4u")
-main_focus = NodePath("new")
-
-[node name="title" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("3_j7q00")
-text = "asdasdasdasd"
-
-[node name="new" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 4
-text = "New Game"
-script = ExtResource("4_6ekxj")
-
-[node name="load" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Load Game"
-script = ExtResource("4_6ekxj")
-
-[node name="settings" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Settings"
-script = ExtResource("4_6ekxj")
-
-[node name="quit" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Quit"
-script = ExtResource("4_6ekxj")
-mode = 2
-
-[node name="UiMenu" type="VBoxContainer" parent="." node_paths=PackedStringArray("main_focus")]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 8.0
-grow_vertical = 2
-script = ExtResource("5_or4c5")
-folder = "res://scenes/maps"
-main_focus = NodePath("UiButton")
-
-[node name="UiButton" type="Button" parent="UiMenu"]
-layout_mode = 2
-text = "4654654654564"
-script = ExtResource("4_6ekxj")
+offset_left = -204.5
+offset_right = 204.5
+path = "settings/"

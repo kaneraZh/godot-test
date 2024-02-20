@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdeerhsk4yj0n"]
+
+[ext_resource type="Script" path="res://scripts/gui/menu.gd" id="1_tulbq"]
+[ext_resource type="Theme" uid="uid://g7vo8gf6lyg" path="res://gui/themes/title.tres" id="2_7oxxy"]
+[ext_resource type="Script" path="res://scripts/gui/buttons/button.gd" id="3_6ye3a"]
+[ext_resource type="PackedScene" uid="uid://gqelmdglrdo3" path="res://scenes/submenus/proof_of_concept.tscn" id="4_h6ou7"]
+[ext_resource type="PackedScene" uid="uid://dicrrkhe5nkcs" path="res://scenes/submenus/settings.tscn" id="5_xjscf"]
+[ext_resource type="PackedScene" uid="uid://ocrgncg8wypi" path="res://scenes/popups/yes_no.tscn" id="6_gedda"]
+
+[node name="main_menu" type="VBoxContainer" node_paths=PackedStringArray("main_focus")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tulbq")
+main_focus = NodePath("new_game")
+
+[node name="title" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("2_7oxxy")
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="new_game" type="Button" parent="."]
+layout_mode = 2
+text = "New Game"
+script = ExtResource("3_6ye3a")
+mode = 1
+generic_resource = ExtResource("4_h6ou7")
+
+[node name="load_game" type="Button" parent="."]
+layout_mode = 2
+text = "Load Game"
+script = ExtResource("3_6ye3a")
+mode = 5
+options = 3
+method_class = 0
+method_method = &""
+popup_mode = 1
+popup_scene = null
+popup_check_method = &""
+popup_text = ""
+
+[node name="settings" type="Button" parent="."]
+layout_mode = 2
+text = "Settings"
+script = ExtResource("3_6ye3a")
+mode = 1
+generic_resource = ExtResource("5_xjscf")
+
+[node name="quit" type="Button" parent="."]
+layout_mode = 2
+text = "Quit"
+script = ExtResource("3_6ye3a")
+mode = 5
+options = 3
+method_class = 0
+method_method = &"quit"
+popup_mode = 0
+popup_scene = ExtResource("6_gedda")
+popup_text = "Are you sure you wish to quit?"

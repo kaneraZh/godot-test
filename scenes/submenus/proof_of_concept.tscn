@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://gqelmdglrdo3"]
+
+[ext_resource type="Script" path="res://scripts/gui/menu.gd" id="1_3io1k"]
+[ext_resource type="Script" path="res://scripts/gui/buttons/button.gd" id="2_sjpbr"]
+[ext_resource type="PackedScene" uid="uid://ocrgncg8wypi" path="res://scenes/popups/yes_no.tscn" id="3_rwffv"]
+
+[node name="Control" type="VBoxContainer" node_paths=PackedStringArray("main_focus")]
+custom_minimum_size = Vector2(384, 0)
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3io1k")
+main_focus = NodePath("proof")
+
+[node name="proof" type="Button" parent="."]
+layout_mode = 2
+text = "asdasdasd"
+script = ExtResource("2_sjpbr")
+
+[node name="back" type="Button" parent="."]
+layout_mode = 2
+text = "back"
+script = ExtResource("2_sjpbr")
+options = 3
+popup_mode = 0
+popup_scene = ExtResource("3_rwffv")
+popup_text = "go back?!"
+
+[node name="themes" type="Button" parent="."]
+layout_mode = 2
+text = "Themes"
+script = ExtResource("2_sjpbr")
+mode = 4
+folder_directory = "res://gui"

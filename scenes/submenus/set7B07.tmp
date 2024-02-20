@@ -1,0 +1,195 @@
+[gd_scene load_steps=10 format=3 uid="uid://dicrrkhe5nkcs"]
+
+[ext_resource type="Theme" uid="uid://df4sw8fwwoueb" path="res://gui/themes/menu.tres" id="1_v7vgp"]
+[ext_resource type="Script" path="res://scripts/gui/settings.gd" id="2_cprka"]
+[ext_resource type="Script" path="res://scripts/gui/settings/slider.gd" id="3_522lh"]
+[ext_resource type="Script" path="res://scripts/gui/settings/input.gd" id="4_tx65m"]
+[ext_resource type="PackedScene" uid="uid://tmxt5ey7rmb7" path="res://scenes/popups/input_listener.tscn" id="5_scbcn"]
+[ext_resource type="Script" path="res://scripts/gui/buttons/button.gd" id="7_dvxmc"]
+[ext_resource type="PackedScene" uid="uid://ocrgncg8wypi" path="res://scenes/popups/yes_no.tscn" id="7_xywbu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5lxqh"]
+bg_color = Color(1, 0.266667, 0.603922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmdi6"]
+bg_color = Color(0.956863, 0.4, 0.282353, 1)
+
+[node name="Control" type="VBoxContainer" node_paths=PackedStringArray("tab_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_v7vgp")
+script = ExtResource("2_cprka")
+tab_container = NodePath("TabContainer")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+current_tab = 1
+
+[node name="audio" type="ScrollContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="Label" type="Label" parent="TabContainer/audio/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Master Volume"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SettingsSlider" type="HBoxContainer" parent="TabContainer/audio/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_522lh")
+max_value = 1.0
+step = 0.05
+value = 0.8
+setting = "custom/audio/master/normalized_volume"
+type = 3
+default_value = 0.625
+
+[node name="controls" type="ScrollContainer" parent="TabContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 5
+
+[node name="Label" type="Label" parent="TabContainer/controls/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Walk Left"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SettingsInput" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_5lxqh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dmdi6")
+text = "INPUT 1"
+script = ExtResource("4_tx65m")
+action = &"test"
+menu_root = NodePath("../../../..")
+popup_scene = ExtResource("5_scbcn")
+
+[node name="SettingsInput2" type="MenuButton" parent="TabContainer/controls/GridContainer" node_paths=PackedStringArray("menu_root")]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+text = "INPUT 2"
+script = ExtResource("4_tx65m")
+action = &"test"
+device = 9
+menu_root = NodePath("../../../..")
+popup_scene = ExtResource("5_scbcn")
+
+[node name="SettingsInput3" type="MenuButton" parent="TabContainer/controls/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_5lxqh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dmdi6")
+text = "INPUT 1"
+item_count = 5
+popup/item_0/text = "Keyboard"
+popup/item_0/id = 9
+popup/item_1/text = "Mouse"
+popup/item_1/id = 10
+popup/item_2/text = "Mouse Motion"
+popup/item_2/id = 11
+popup/item_3/text = "Joystick"
+popup/item_3/id = 8
+popup/item_4/text = "Clear"
+popup/item_4/id = 4
+script = ExtResource("4_tx65m")
+action = &"test"
+device = 9
+popup_scene = ExtResource("5_scbcn")
+
+[node name="SettingsInput4" type="MenuButton" parent="TabContainer/controls/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+text = "INPUT 2"
+item_count = 5
+popup/item_0/text = "Keyboard"
+popup/item_0/id = 9
+popup/item_1/text = "Mouse"
+popup/item_1/id = 10
+popup/item_2/text = "Mouse Motion"
+popup/item_2/id = 11
+popup/item_3/text = "Joystick"
+popup/item_3/id = 8
+popup/item_4/text = "Clear"
+popup/item_4/id = 4
+script = ExtResource("4_tx65m")
+action = &"test"
+device = 9
+popup_scene = ExtResource("5_scbcn")
+
+[node name="UiMenu" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="UiMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="back" type="Button" parent="UiMenu" node_paths=PackedStringArray("menu_root")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "Back"
+script = ExtResource("7_dvxmc")
+options = 2
+menu_root = NodePath("../..")
+popup_mode = 1
+popup_scene = ExtResource("7_xywbu")
+popup_check_method = &"settings_check_all"
+popup_text = "Do you wish to discard your unsaved settings?"
+
+[node name="save" type="Button" parent="UiMenu" node_paths=PackedStringArray("menu_root")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "Save"
+script = ExtResource("7_dvxmc")
+mode = 5
+options = 2
+menu_root = NodePath("../..")
+method_class = 0
+method_method = &"settings_save"
+popup_mode = 0
+popup_scene = ExtResource("7_xywbu")
+popup_text = "Are you sure you want to save all settings?"
+
+[node name="reset" type="Button" parent="UiMenu" node_paths=PackedStringArray("menu_root")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "Reset"
+script = ExtResource("7_dvxmc")
+mode = 5
+options = 2
+menu_root = NodePath("../..")
+method_class = 1
+method_method = &"reset_settings"
+popup_mode = 0
+popup_scene = ExtResource("7_xywbu")
+popup_text = "Are you sure you want to reset all your settings?"
+
+[node name="Control2" type="Control" parent="UiMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
