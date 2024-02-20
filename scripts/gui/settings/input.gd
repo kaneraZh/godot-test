@@ -189,6 +189,7 @@ func _on_selection(item_id:int)->void:
 			set_input_event(null)
 		_:
 			var popup:Control = popup_scene.instantiate()
+			popup.connect(&"tree_exiting", Callable(self, &"grab_focus"), CONNECT_DEFERRED)
 			popup.connect(&"accept", Callable(self, &"set_input_event"))
 			print_debug("Called listener with <%s>"%[device_id])
 			popup.set_listening_device(device_id)

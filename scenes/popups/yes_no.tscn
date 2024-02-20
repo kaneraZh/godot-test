@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ocrgncg8wypi"]
 
 [ext_resource type="Theme" uid="uid://btftv7bx252it" path="res://gui/themes/popup.tres" id="1_un3ic"]
-[ext_resource type="Script" path="res://scripts/gui/popups/yes_no.gd" id="2_y2itk"]
+[ext_resource type="Script" path="res://scripts/gui/popups/yes_no.gd" id="2_nmn1q"]
 
 [node name="yes_no" type="PanelContainer" node_paths=PackedStringArray("label", "btn_accept", "btn_cancel")]
 anchors_preset = 8
@@ -16,7 +16,7 @@ offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_un3ic")
-script = ExtResource("2_y2itk")
+script = ExtResource("2_nmn1q")
 label = NodePath("MarginContainer/VBoxContainer/Label")
 btn_accept = NodePath("MarginContainer/VBoxContainer/HBoxContainer/yes")
 btn_cancel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/no")

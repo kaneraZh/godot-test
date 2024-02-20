@@ -10,6 +10,7 @@ func get_path_step(id:int = 0): return path.rsplit('/')[id]
 @export var main_focus:Control = null
 func _ready():
 	set_anchors_preset(Control.PRESET_VCENTER_WIDE)
+	set_focus_control(FocusInheritanceController.new())
 	
 	var sig:StringName = &"selected"
 	for c in get_children():
@@ -25,6 +26,10 @@ func _ready():
 	else:
 		main_focus.grab_focus()
 
+var focus_control:FocusInheritanceController : set=set_focus_control
+func set_focus_control(v:FocusInheritanceController)->void:
+	focus_control = v
+	focus_control.set_root(self)
 func add_menu(menu:UiMenu)->void:
 	set_visible(false)
 	if(!path.is_empty()):
@@ -33,7 +38,7 @@ func add_menu(menu:UiMenu)->void:
 	menu.connect(&"tree_exiting", Callable(self, &"set_visible").bind(true), CONNECT_DEFERRED)
 	add_sibling(menu)
 	#menu.call_deferred(&"grab_focus")
-
 func add_popup(menu:Control)->void:
 	add_sibling(menu)
-	#menu.call_deferred(&"grab_focus")
+	focus_control.set_mode_branches(Control.FOCUS_NONE)
+	menu.connect(&"tree_exiting", Callable(focus_control, &"set_mode_branches").bind(Control.FOCUS_ALL))

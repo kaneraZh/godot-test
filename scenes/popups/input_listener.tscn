@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://tmxt5ey7rmb7"]
 
 [ext_resource type="Theme" uid="uid://btftv7bx252it" path="res://gui/themes/popup.tres" id="1_2jrfc"]
-[ext_resource type="Script" path="res://scripts/gui/popups/input_listener.gd" id="2_8ruy3"]
+[ext_resource type="Script" path="res://scripts/gui/popups/input_listener.gd" id="2_es8mx"]
 
 [node name="input_listener" type="PanelContainer" node_paths=PackedStringArray("label", "btn_accept", "btn_listen", "btn_cancel")]
 anchors_preset = 8
@@ -16,7 +16,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_2jrfc")
-script = ExtResource("2_8ruy3")
+script = ExtResource("2_es8mx")
 label = NodePath("MarginContainer/VBoxContainer/Label")
 btn_accept = NodePath("MarginContainer/VBoxContainer/HBoxContainer/accept")
 btn_listen = NodePath("MarginContainer/VBoxContainer/HBoxContainer/listen")
