@@ -1,20 +1,5 @@
 extends Node
 
-#static func _get_input_map_events(
-	#actions:PackedStringArray
-#)->Dictionary:
-	#var action_events:Dictionary = {}
-	#for action:String in actions:
-		#action_events[action] = InputMap.action_get_events(action)
-	#return action_events
-#static func _set_input_map_events(
-	#action_events:Dictionary
-#)->void:
-	#for action in action_events.keys():
-		#InputMap.action_erase_events(action)
-		#for event:InputEvent in action_events[action]:
-			#InputMap.action_add_event(action, event)
-
 static func _get_project_settings(
 	include:PackedStringArray,
 	exclude:PackedStringArray,
@@ -36,11 +21,14 @@ static func _save_project_settings(
 	paths_exclude:PackedStringArray
 )->int:
 	var file:ConfigFile = ConfigFile.new()
+	var contents:Dictionary = {}
+	var includes = paths_include
 	for path:String in _get_project_settings(paths_include, paths_exclude):
 		var section:String = path.get_slice('/', 0)
 		var key:String = path.trim_prefix("%s/"%section)
 		var value = ProjectSettings.get(path) if !section.matchn("input") else InputMap.action_get_events(key)
 		file.set_value(section,key,value)
+		contents[section+'/'+key] = value
 		print("saved <%s> as %10s"%[path, ProjectSettings.get(path)])
 	return file.save(directory)
 static func _load_project_settings(
@@ -69,9 +57,13 @@ static func _reset_project_settings(
 	paths_include:PackedStringArray,
 	paths_exclude:PackedStringArray
 )->void:
+	if(paths_include.has("input/")):
+		InputMap.load_from_project_settings()
+		paths_include.remove_at(
+			paths_include.find("input/")
+		)
 	for path:String in _get_project_settings(paths_include, paths_exclude):
 		ProjectSettings.set_setting(path, ProjectSettings.property_get_revert(path))
-		#print_debug(ProjectSettings.property_get_revert(path))
 
 const DEFAULT_SETTINGS_DIRECTORY:String			= "user://settings.cfg"
 const DEFAULT_SETTINGS_INCLUDE:PackedStringArray= ["custom/", "manager/", "input/"]
@@ -92,10 +84,10 @@ static func save_settings()->void:
 			DEFAULT_SETTINGS_DIRECTORY),
 		ProjectSettings.get_setting(
 			"manager/settings/settings/include",
-			DEFAULT_SETTINGS_INCLUDE),
+			DEFAULT_SETTINGS_INCLUDE.duplicate()),
 		ProjectSettings.get_setting(
 			"manager/settings/settings/exclude",
-			DEFAULT_SETTINGS_EXCLUDE),
+			DEFAULT_SETTINGS_EXCLUDE.duplicate()),
 	)
 static func save_game()->void:
 	#assert(
@@ -109,10 +101,10 @@ static func save_game()->void:
 			DEFAULT_GAMEFILE_DIRECTORY),
 		ProjectSettings.get_setting(
 			"manager/settings/game_data/include",
-			DEFAULT_GAMEFILE_INCLUDE),
+			DEFAULT_GAMEFILE_INCLUDE.duplicate()),
 		ProjectSettings.get_setting(
 			"manager/settings/game_data/exclude",
-			DEFAULT_GAMEFILE_EXCLUDE),
+			DEFAULT_GAMEFILE_EXCLUDE.duplicate()),
 	)
 static func load_settings()->void:
 	#assert(
@@ -142,10 +134,10 @@ static func reset_settings()->void:
 	_reset_project_settings(
 		ProjectSettings.get_setting(
 			"manager/settings/settings/include",
-			DEFAULT_SETTINGS_INCLUDE),
+			DEFAULT_SETTINGS_INCLUDE.duplicate()),
 		ProjectSettings.get_setting(
 			"manager/settings/settings/exclude",
-			DEFAULT_SETTINGS_EXCLUDE),
+			DEFAULT_SETTINGS_EXCLUDE.duplicate()),
 	)
 static func reset_game()->void:
 	#assert(
@@ -155,10 +147,10 @@ static func reset_game()->void:
 	_reset_project_settings(
 		ProjectSettings.get_setting(
 			"manager/settings/game_data/include",
-			DEFAULT_GAMEFILE_INCLUDE),
+			DEFAULT_GAMEFILE_INCLUDE.duplicate()),
 		ProjectSettings.get_setting(
 			"manager/settings/game_data/exclude",
-			DEFAULT_GAMEFILE_EXCLUDE),
+			DEFAULT_GAMEFILE_EXCLUDE.duplicate()),
 	)
 
 func _init()->void:
